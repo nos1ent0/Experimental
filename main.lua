@@ -23,11 +23,39 @@ function love.update(dt)
 
     for i, r in ipairs(redBalls) do
         r.x = r.x + r.speed * dt 
+    
     end
 
-    for i, w in ipairs(whiteBalls) do
+     for i, w in ipairs(whiteBalls) do
         w.x = w.x - w.speed * dt 
+     end
+
+    ---collision
+    for i, r in ipairs(redBalls)do
+        for i, w in ipairs(whiteBalls) do
+            if distanceBetween (r.x, r.y, w.x, w.y ) then
+                r.dead = true
+                w.dead = true
+            end
+        end
+
     end
+    ---dead states
+    for i=#redBalls, 1, -1 do
+        local z = redBalls[i] 
+        if z.dead == true then
+            table.remove(redBalls, i)
+        end
+    end
+    
+    for i=#whiteBalls, 1, -1 do
+        local z = whiteBalls[i]
+        if z.dead == true then
+            table.remove(whiteBalls, i)
+        end 
+    end
+
+    
 
 
 end
@@ -81,8 +109,6 @@ function love.keypressed ( key )
 end
 
 function distanceBetween(x1, y1, x2, y2)
-    return math.sqrt((x2 - x1)^2 + (y2 - y1)^2) 
+  return math.sqrt((x2 - x1)^2 + (y2 - y1)^2) 
 end
-end
- 
 
