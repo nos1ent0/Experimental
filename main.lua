@@ -33,7 +33,7 @@ function love.update(dt)
     ---collision
     for i, r in ipairs(redBalls)do
         for i, w in ipairs(whiteBalls) do
-            if distanceBetween (r.x, r.y, w.x, w.y ) then
+            if distanceBetween (r.x, r.y, w.x, w.y ) < 19 then
                 r.dead = true
                 w.dead = true
             end
@@ -79,7 +79,7 @@ function redBallsSpawner()
     local redball = {}
     redball.x =  100 --math.random(0, love.graphics.getWidth()) 
     redball.y = math.random(0, love.graphics.getHeight())
-    redball.speed = 30
+    redball.speed = 100
     redball.dead = false
     table.insert(redBalls, redball) 
 
@@ -90,7 +90,7 @@ function whiteBallsSpawner()
     local whiteball = {}
     whiteball.x = 700  --math.random(0, love.graphics.getWidth()) 
     whiteball.y = math.random(0, love.graphics.getHeight() )
-    whiteball.speed = 30
+    whiteball.speed = 100
     whiteball.dead = false
     table.insert(whiteBalls, whiteball) 
     
